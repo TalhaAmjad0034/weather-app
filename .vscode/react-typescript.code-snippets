@@ -1,0 +1,88 @@
+// Usefull Link for turning Code into nicely formatted Snippets https://snippet-generator.app/
+{
+  "A new next page with some basic scaffolding for the project": {
+    "prefix": "np",
+    "body": [
+      "import {} from '@mui/material';",
+      "import Image from 'components/Image';",
+      "import UserSessionProvider from 'components/UserSessionProvider';",
+      "import { NextPage } from 'next';",
+      "import React from 'react';",
+      "",
+      "const ${TM_FILENAME_BASE:Name}: NextPage = () => {",
+      "  return (",
+      "    <UserSessionProvider",
+      "      allowUnauthenticated",
+      "      allowedRoles={[]}$0",
+      "    ></UserSessionProvider>",
+      "  );",
+      "};",
+      "",
+      "export default ${TM_FILENAME_BASE:Name};",
+      ""
+    ],
+    "description": "A new next page with some basic scaffolding for the project"
+  },
+  "ProjectReact Functional": {
+    "scope": "typescriptreact",
+    "prefix": "rfc",
+    "body": [
+      "import React from 'react'",
+      "",
+      "interface ${TM_FILENAME_BASE:Name}Props {",
+      "  exampleProp: string",
+      "}",
+      "",
+      "export const ${TM_FILENAME_BASE:Name}: React.FunctionComponent<${TM_FILENAME_BASE:Name}Props> = ({",
+      "  exampleProp,",
+      "}) => {",
+      "",
+      "  $0",
+      "",
+      "  return (",
+      "    <React.Fragment>",
+      "      <div></div>",
+      "    </React.Fragment>",
+      "  )",
+      "}",
+      "",
+      "export default ${TM_FILENAME_BASE:Name}"
+    ],
+    "description": "A react functional component in the correct format for general use in this project!"
+  },
+
+  "ProjectReact Functional Index File": {
+    "scope": "typescriptreact",
+    "prefix": "rfci",
+    "body": [
+      "import React from 'react'",
+      "",
+      "interface ${TM_DIRECTORY/.*\\/(.*)$/$1/g}Props {",
+      "  exampleProp: string",
+      "}",
+      "",
+      "export const ${TM_DIRECTORY/.*\\/(.*)$/$1/g}: React.FunctionComponent<${TM_DIRECTORY/.*\\/(.*)$/$1/g}Props> = ({",
+      "  exampleProp,",
+      "}) => {",
+      "",
+      "  $0",
+      "",
+      "  return (",
+      "    <React.Fragment>",
+      "      <div></div>",
+      "    </React.Fragment>",
+      "  )",
+      "}",
+      "",
+      "export default ${TM_DIRECTORY/.*\\/(.*)$/$1/g}"
+    ],
+    "description": "A react functional component in the correct format for general use in this project when using form an index.js file!"
+  },
+
+  // React Snippets
+  "use state hook": {
+    "prefix": "rusestatehook",
+    "body": ["const [${1}, set${1/(.*)/${1:/capitalize}/}] = useState($2);"],
+    "description": "Declare a new state Variable using the State Hook. Hit Tab to apply CamelCase to function"
+  }
+}

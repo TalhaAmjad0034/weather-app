@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "formulahendry.auto-rename-tag",
+    "aaron-bond.better-comments",
+    "streetsidesoftware.code-spell-checker",
+    "naumovs.color-highlight",
+    "irongeek.vscode-env",
+    "dbaeumer.vscode-eslint",
+    "mhutchie.git-graph",
+    "wix.vscode-import-cost",
+    "davidanson.vscode-markdownlint",
+    "esbenp.prettier-vscode"
+  ]
+}
