@@ -1,6 +1,5 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, useRef } from "react";
 import {
-  Container,
   Box,
   Typography,
   TextField,
@@ -8,14 +7,17 @@ import {
   InputAdornment,
   IconButton,
   CircularProgress,
-  Button,
   Snackbar,
+  Button,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { getCityWeather } from "src/services/getWeather";
 import WeatherDisplay from "src/components/WeatherDisplay";
 import { WeatherDataType } from "src/services/getWeather";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { themeContext } from "ThemeContext";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -30,7 +32,11 @@ export default function Home(): JSX.Element {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
+  const { currentTheme, changeThemeHandler }: any =
+    React.useContext(themeContext);
+  const snackbarRef = useRef<any>(null);
 
+  // Validates the entered city name
   const validateCity = (): boolean => {
     if (!city) {
       handleSnackbarOpen("Please enter a city name");
@@ -43,6 +49,7 @@ export default function Home(): JSX.Element {
     return true;
   };
 
+  // Handles the form submission and fetches weather data for the entered city
   const handleSearch = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
@@ -64,15 +71,18 @@ export default function Home(): JSX.Element {
     }
   };
 
+  // Opens the snackbar and sets the error message
   const handleSnackbarOpen = (message: string) => {
     setError(message);
     setOpen(true);
   };
 
+  // Closes the snackbar
   const handleSnackbarClose = () => {
     setOpen(false);
   };
 
+  // Renders the content based on loading, data, and error states
   const renderContent = () => {
     if (isLoading) {
       return (
@@ -95,18 +105,47 @@ export default function Home(): JSX.Element {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Box
+      sx={{
+        backgroundColor: currentTheme ? "#FFFFF7" : "#000",
+        height: "100vh",
+      }}
+    >
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Snackbar
           open={open}
           autoHideDuration={6000}
           onClose={handleSnackbarClose}
+          ref={snackbarRef}
         >
           <Alert onClose={handleSnackbarClose} severity="warning">
             {error}
           </Alert>
         </Snackbar>
       </Stack>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: {
+            xs: "center",
+            md: "flex-end",
+          },
+          margin: "20px",
+        }}
+      >
+        <Button
+          href="#switch"
+          sx={{
+            padding: "10px 40px",
+            marginBlock: "20px",
+          }}
+          onClick={changeThemeHandler}
+          variant="contained"
+          endIcon={currentTheme ? <LightModeIcon /> : <DarkModeIcon />}
+        >
+          Lights ?
+        </Button>
+      </Box>
       <Typography variant="h4" mb={5} mt={3} align="center" gutterBottom>
         Weather App
       </Typography>
@@ -136,6 +175,6 @@ export default function Home(): JSX.Element {
         </form>
       </Stack>
       <Box mt={4}>{renderContent()}</Box>
-    </Container>
+    </Box>
   );
 }
